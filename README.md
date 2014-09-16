@@ -10,4 +10,4 @@ This is an example application using [Spring Boot](http://projects.spring.io/spr
 ###Running the example
 	mvn spring-boot:run
 
-Next up, go to **localhost:7007/ to see the index page, with an overview of all your SSH Credentials. At startup there will be no SSH Credentials. Through the import menu you can batch import a list of SSH Credentials.
+Next up, go to **localhost:7007/** to see the index page, with an overview of all your SSH Credentials. At startup there will be no SSH Credentials. Through the import menu you can batch import a list of SSH Credentials.
