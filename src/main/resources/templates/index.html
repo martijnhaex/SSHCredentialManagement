@@ -49,6 +49,7 @@
                                 <td th:text="${credential['username']}"></td>
                                 <td th:text="${credential['url']}"></td>
                                 <td th:text="|sshpass -p '${credential['password']}' ssh -o StrictHostKeyChecking=no ${credential['username']}@${credential['url']}|"></td>
+                                <td><a href="#" th:href="@{'/' + ${credential['id']} + '/delete'}">Delete</a></td>
                             </tr>
                             </tbody>
                         </table>

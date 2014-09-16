@@ -10,4 +10,5 @@ public interface ICredentialService {
 
     void batchSave(List<Credential> credentials);
 
+    void delete(Long credentialId);
 }
