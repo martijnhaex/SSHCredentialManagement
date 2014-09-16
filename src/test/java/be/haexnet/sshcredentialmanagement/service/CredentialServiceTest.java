@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CredentialServiceTest {
@@ -23,12 +24,14 @@ public class CredentialServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        credentialService  = new CredentialService(credentialRepository);
+        credentialService = new CredentialService(credentialRepository);
     }
 
     @Test
     public void findAll() throws Exception {
-        assertThat(credentialService.findAll()).isEqualTo(Collections.emptyList());
+        final List<Credential> credentials = Collections.emptyList();
+        when(credentialRepository.findAll()).thenReturn(credentials);
+        assertThat(credentialService.findAll()).isSameAs(credentials);
     }
 
     @Test
