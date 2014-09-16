@@ -34,6 +34,24 @@
             <div class="blog--container">
                 <div class="meta-data--container">
                     <article class="blog--post">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Server</th>
+                                <th>User</th>
+                                <th>Url</th>
+                                <th>Connection</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="credential : ${credentials}">
+                                <td th:text="${credential['server']}"></td>
+                                <td th:text="${credential['username']}"></td>
+                                <td th:text="${credential['url']}"></td>
+                                <td th:text="|sshpass -p '${credential['password']}' ssh -o StrictHostKeyChecking=no ${credential['username']}@${credential['url']}|"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </article>
                 </div>
             </div>
