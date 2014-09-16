@@ -32,7 +32,7 @@
             <div class="blog--container">
                 <div class="meta-data--container">
                     <article class="blog--post">
-                        <form action="#" th:action="@{/import}" th:object="${command}" method="post">
+                        <form action="#" th:action="@{/batch-import}" th:object="${command}" method="post">
                             <label th:for="${#ids.next('credentials')}">Import new credentials: </label>
                             <textarea th:field="*{credentials}"/>
                             <button type="submit" name="import">Import</button>

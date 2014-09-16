@@ -13,11 +13,11 @@ public class Credential implements Serializable {
     public Credential() {
     }
 
-    public Credential(Long id, String server, String username, String password, String url) {
+    public Credential(Long id, String server, String password, String username, String url) {
         this.id = id;
         this.server = server;
-        this.username = username;
         this.password = password;
+        this.username = username;
         this.url = url;
     }
 
