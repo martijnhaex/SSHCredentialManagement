@@ -3,6 +3,7 @@ package be.haexnet.sshcredentialmanagement.service;
 import be.haexnet.sshcredentialmanagement.model.Credential;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ICredentialService {
 
@@ -11,4 +12,7 @@ public interface ICredentialService {
     void batchSave(List<Credential> credentials);
 
     void delete(Long credentialId);
+
+    Optional<Credential> findOne(Long credentialId);
+
 }

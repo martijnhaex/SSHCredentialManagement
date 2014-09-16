@@ -22,7 +22,7 @@ public class IndexController {
     }
 
     @RequestMapping("/")
-    public String index(final ModelMap modelMap) {
+    public String index(ModelMap modelMap) {
         final List<Credential> allCredentials = findAllCredentials();
         modelMap.put("credentials", allCredentials);
         return "index";
@@ -32,6 +32,13 @@ public class IndexController {
     public String delete(@PathVariable("id") Long credentialId) {
         credentialService.delete(credentialId);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+    public String showEdit(@PathVariable("id") Long credentialId,
+                           ModelMap modelMap) {
+        modelMap.put("credential", credentialService.findOne(credentialId).get());
+        return "update";
     }
 
     private List<Credential> findAllCredentials() {

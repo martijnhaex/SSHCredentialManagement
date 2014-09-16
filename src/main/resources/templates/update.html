@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>SSH Credential Management</title>
+    <title>Connection Credentials</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no"
           id="Viewport" name="viewport"/>
@@ -20,7 +20,7 @@
                 </div>
                 <ul class="nav pull-right">
                     <li class="navbar-link">
-                        <a href="/batch-import">Batch Import</a>
+                        <a href="/import">Batch Import</a>
                     </li>
                 </ul>
             </div>
@@ -34,26 +34,23 @@
             <div class="blog--container">
                 <div class="meta-data--container">
                     <article class="blog--post">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Server</th>
-                                <th>User</th>
-                                <th>Url</th>
-                                <th>Connection</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="credential : ${credentials}">
-                                <td th:text="${credential['server']}"></td>
-                                <td th:text="${credential['username']}"></td>
-                                <td th:text="${credential['url']}"></td>
-                                <td th:text="|sshpass -p '${credential['password']}' ssh -o StrictHostKeyChecking=no ${credential['username']}@${credential['url']}|"></td>
-                                <td><a href="#" th:href="@{'/' + ${credential['id']} + '/edit'}">Update</a></td>
-                                <td><a href="#" th:href="@{'/' + ${credential['id']} + '/delete'}">Delete</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <form action="#" th:action="@{/edit}" th:object="${credential}" method="post">
+                            <input type="hidden" th:field="*{id}"/>
+
+                            <label th:for="${#ids.next('server')}">Server: </label>
+                            <input type="text" th:field="*{server}"/>
+
+                            <label th:for="${#ids.next('username')}">Username: </label>
+                            <input type="text" th:field="*{username}"/>
+
+                            <label th:for="${#ids.next('password')}">Password: </label>
+                            <input type="text" th:field="*{password}"/>
+
+                            <label th:for="${#ids.next('url')}">Url: </label>
+                            <input type="text" th:field="*{url}"/>
+
+                            <button type="submit" name="update">Update</button>
+                        </form>
                     </article>
                 </div>
             </div>

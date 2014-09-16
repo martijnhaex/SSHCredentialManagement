@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +37,14 @@ public class CredentialService implements ICredentialService {
                 .collect(Collectors.toList());
 
         batchSave(credentials);
+    }
+
+    @Override
+    public Optional<Credential> findOne(Long credentialId) {
+        return findAll()
+                .stream()
+                .filter(credential -> credential.getId().equals(credentialId))
+                .findFirst();
     }
 
 }
