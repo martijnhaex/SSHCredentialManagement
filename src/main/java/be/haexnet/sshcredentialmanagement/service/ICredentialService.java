@@ -8,4 +8,6 @@ public interface ICredentialService {
 
     List<Credential> findAll();
 
+    void batchSave(List<Credential> credentials);
+
 }

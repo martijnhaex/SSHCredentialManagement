@@ -1,5 +1,6 @@
 package be.haexnet.sshcredentialmanagement.controller;
 
+import be.haexnet.sshcredentialmanagement.service.ICredentialService;
 import be.haexnet.sshcredentialmanagement.util.CredentialParser;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +20,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 @RunWith(MockitoJUnitRunner.class)
 public class ImportControllerTest {
+
+    @Mock
+    ICredentialService credentialService;
     @Mock
     CredentialParser credentialParser;
 
@@ -26,7 +30,7 @@ public class ImportControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        mockMvc = standaloneSetup(new ImportController(credentialParser)).build();
+        mockMvc = standaloneSetup(new ImportController(credentialService, credentialParser)).build();
     }
 
     @Test

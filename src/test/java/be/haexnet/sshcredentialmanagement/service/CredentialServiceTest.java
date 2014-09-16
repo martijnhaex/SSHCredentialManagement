@@ -1,19 +1,40 @@
 package be.haexnet.sshcredentialmanagement.service;
 
+import be.haexnet.sshcredentialmanagement.model.Credential;
+import be.haexnet.sshcredentialmanagement.repository.CredentialRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Collections;
+import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CredentialServiceTest {
-    ICredentialService credentialService = new CredentialService();
+    @Mock
+    CredentialRepository credentialRepository;
+
+    ICredentialService credentialService;
+
+    @Before
+    public void setUp() throws Exception {
+        credentialService  = new CredentialService(credentialRepository);
+    }
 
     @Test
     public void findAll() throws Exception {
         assertThat(credentialService.findAll()).isEqualTo(Collections.emptyList());
+    }
+
+    @Test
+    public void batchSave() throws Exception {
+        final List<Credential> credentials = Collections.emptyList();
+        credentialService.batchSave(credentials);
+        verify(credentialRepository).batchSave(credentials);
     }
 }

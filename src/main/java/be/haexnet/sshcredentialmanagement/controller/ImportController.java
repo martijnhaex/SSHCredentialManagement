@@ -2,6 +2,7 @@ package be.haexnet.sshcredentialmanagement.controller;
 
 import be.haexnet.sshcredentialmanagement.controller.command.CredentialCommand;
 import be.haexnet.sshcredentialmanagement.model.Credential;
+import be.haexnet.sshcredentialmanagement.service.ICredentialService;
 import be.haexnet.sshcredentialmanagement.util.CredentialParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,13 @@ import java.util.List;
 @RequestMapping("/batch-import")
 public class ImportController {
 
+    private final ICredentialService credentialService;
     private final CredentialParser credentialParser;
 
     @Autowired
-    public ImportController(final CredentialParser credentialParser) {
+    public ImportController(final ICredentialService credentialService,
+                            final CredentialParser credentialParser) {
+        this.credentialService = credentialService;
         this.credentialParser = credentialParser;
     }
 
@@ -34,7 +38,9 @@ public class ImportController {
     }
 
     private void saveCredentials(final CredentialCommand credentialCommand) {
-        parseCredentials(credentialCommand.getCredentials());
+        credentialService.batchSave(
+                parseCredentials(credentialCommand.getCredentials())
+        );
     }
 
     private List<Credential> parseCredentials(final String credentialsAString) {
