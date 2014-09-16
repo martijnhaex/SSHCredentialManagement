@@ -38,7 +38,7 @@ public class CredentialParser {
 
             if (credentialParts.length >= 4) {
                 return Optional.of(
-                        new Credential(generateId(), credentialParts[0].trim(), credentialParts[1].trim(), credentialParts[2].trim(), credentialParts[3].trim())
+                        Credential.of(generateId(), credentialParts[0].trim(), credentialParts[1].trim(), credentialParts[2].trim(), credentialParts[3].trim())
                 );
             }
             return Optional.empty();
