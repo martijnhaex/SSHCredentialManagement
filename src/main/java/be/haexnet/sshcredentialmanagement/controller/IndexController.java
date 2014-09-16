@@ -21,7 +21,8 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(final ModelMap modelMap) {
-        modelMap.put("credentials", findAllCredentials());
+        final List<Credential> allCredentials = findAllCredentials();
+        modelMap.put("credentials", allCredentials);
         return "index";
     }
 
