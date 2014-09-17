@@ -9,6 +9,32 @@
           type="text/css"/>
     <link rel="stylesheet" type="text/css" href="http://spring.io/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="http://spring.io/css/blog.css"/>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"/>
+    <script type="text/javascript" th:inline="javascript">
+        $(document).on('click', '.selector', function(event) {
+            selectText('credential_' + event.target.id);
+        });
+
+        function selectText(element) {
+            var doc = document,
+                    text = doc.getElementById(element),
+                    range,
+                    selection;
+
+            if (doc.body.createTextRange) {
+                range = doc.body.createTextRange();
+                range.moveToElementText(text);
+                range.select();
+            } else if (window.getSelection) {
+                selection = window.getSelection();
+                range = doc.createRange();
+                range.selectNodeContents(text);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="viewport">
@@ -48,7 +74,8 @@
                                 <td th:text="${credential['server']}"></td>
                                 <td th:text="${credential['username']}"></td>
                                 <td th:text="${credential['url']}"></td>
-                                <td th:text="|sshpass -p '${credential['password']}' ssh -o StrictHostKeyChecking=no ${credential['username']}@${credential['url']}|"></td>
+                                <td th:text="|sshpass -p '${credential['password']}' ssh -o StrictHostKeyChecking=no ${credential['username']}@${credential['url']}|" th:id="|credential_${credential['id']}|"></td>
+                                <td><a href="#" th:id="|${credential['id']}|" class="selector">Select</a></td>
                                 <td><a href="#" th:href="@{'/' + ${credential['id']} + '/edit'}">Update</a></td>
                                 <td><a href="#" th:href="@{'/' + ${credential['id']} + '/delete'}">Delete</a></td>
                             </tr>
