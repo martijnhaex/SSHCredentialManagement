@@ -15,4 +15,5 @@ public interface ICredentialService {
 
     Optional<Credential> findOne(Long credentialId);
 
+    void update(Credential credential);
 }

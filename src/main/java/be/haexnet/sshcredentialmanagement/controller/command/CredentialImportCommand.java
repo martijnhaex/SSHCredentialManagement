@@ -1,6 +1,6 @@
 package be.haexnet.sshcredentialmanagement.controller.command;
 
-public class CredentialCommand {
+public class CredentialImportCommand {
 
     private String credentials;
 

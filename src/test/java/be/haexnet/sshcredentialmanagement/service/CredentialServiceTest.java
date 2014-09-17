@@ -19,6 +19,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CredentialServiceTest {
+
     @Mock
     CredentialRepository credentialRepository;
 
@@ -68,4 +69,5 @@ public class CredentialServiceTest {
     public void findOneUnhappyPath() throws Exception {
          assertThat(credentialService.findOne(6L).isPresent()).isFalse();
     }
+
 }

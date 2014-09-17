@@ -47,4 +47,13 @@ public class CredentialService implements ICredentialService {
                 .findFirst();
     }
 
+    @Override
+    public void update(Credential credential) {
+        delete(credential.getId());
+
+        final List<Credential> credentials = findAll();
+        credentials.add(credential);
+        batchSave(credentials);
+    }
+
 }
