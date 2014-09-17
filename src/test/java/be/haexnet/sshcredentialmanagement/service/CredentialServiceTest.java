@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -18,14 +19,20 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CredentialServiceTest {
+
     @Mock
     CredentialRepository credentialRepository;
 
     ICredentialService credentialService;
 
+    List<Credential> credentials;
+
     @Before
     public void setUp() throws Exception {
         credentialService = new CredentialService(credentialRepository);
+        credentials = CredentialFixture.LIST();
+
+        when(credentialRepository.findAll()).thenReturn(credentials);
     }
 
     @Test
@@ -44,13 +51,23 @@ public class CredentialServiceTest {
 
     @Test
     public void delete() throws Exception {
-        final List<Credential> credentials = CredentialFixture.LIST();
-
-        when(credentialRepository.findAll()).thenReturn(credentials);
-
         credentialService.delete(1L);
 
         credentials.remove(2);
         verify(credentialRepository).batchSave(credentials);
     }
+
+    @Test
+    public void findOneHappyPath() throws Exception {
+        final Optional<Credential> credential = credentialService.findOne(3L);
+
+        assertThat(credential.isPresent()).isTrue();
+        assertThat(credential.get()).isSameAs(credentials.get(1));
+    }
+
+    @Test
+    public void findOneUnhappyPath() throws Exception {
+         assertThat(credentialService.findOne(6L).isPresent()).isFalse();
+    }
+
 }

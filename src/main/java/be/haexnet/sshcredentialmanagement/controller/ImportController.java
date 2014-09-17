@@ -1,6 +1,6 @@
 package be.haexnet.sshcredentialmanagement.controller;
 
-import be.haexnet.sshcredentialmanagement.controller.command.CredentialCommand;
+import be.haexnet.sshcredentialmanagement.controller.command.CredentialImportCommand;
 import be.haexnet.sshcredentialmanagement.model.Credential;
 import be.haexnet.sshcredentialmanagement.service.ICredentialService;
 import be.haexnet.sshcredentialmanagement.util.CredentialParser;
@@ -27,19 +27,19 @@ public class ImportController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showImport(@ModelAttribute("command") CredentialCommand credentialCommand) {
+    public String showImport(@ModelAttribute("command") CredentialImportCommand credentialImportCommand) {
         return "import";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String doImport(@ModelAttribute("command") CredentialCommand credentialCommand) {
-        saveCredentials(credentialCommand);
+    public String doImport(@ModelAttribute("command") CredentialImportCommand credentialImportCommand) {
+        saveCredentials(credentialImportCommand);
         return "redirect:/";
     }
 
-    private void saveCredentials(final CredentialCommand credentialCommand) {
+    private void saveCredentials(final CredentialImportCommand credentialImportCommand) {
         credentialService.batchSave(
-                parseCredentials(credentialCommand.getCredentials())
+                parseCredentials(credentialImportCommand.getCredentials())
         );
     }
 
