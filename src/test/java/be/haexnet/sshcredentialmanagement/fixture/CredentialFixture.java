@@ -11,13 +11,13 @@ public final class CredentialFixture {
 
     public static List<Credential> LIST() {
         final List<Credential> credentials = new ArrayList<>();
-        credentials.add(CREATE(2L));
-        credentials.add(CREATE(3L));
-        credentials.add(CREATE(1L));
+        credentials.add(CREATE("2"));
+        credentials.add(CREATE("3"));
+        credentials.add(CREATE("1"));
         return credentials;
     }
 
-    public static Credential CREATE(final Long id) {
+    public static Credential CREATE(final String id) {
         return Credential.of(
                 id,
                 "SERVER" + id,

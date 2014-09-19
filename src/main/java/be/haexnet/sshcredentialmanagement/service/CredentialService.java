@@ -30,7 +30,7 @@ public class CredentialService implements ICredentialService {
     }
 
     @Override
-    public void delete(Long credentialId) {
+    public void delete(String credentialId) {
         final List<Credential> credentials = findAll()
                 .stream()
                 .filter(credential -> !credential.getId().equals(credentialId))
@@ -40,7 +40,7 @@ public class CredentialService implements ICredentialService {
     }
 
     @Override
-    public Optional<Credential> findOne(Long credentialId) {
+    public Optional<Credential> findOne(String credentialId) {
         return findAll()
                 .stream()
                 .filter(credential -> credential.getId().equals(credentialId))

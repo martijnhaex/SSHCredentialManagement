@@ -11,9 +11,9 @@ public interface ICredentialService {
 
     void batchSave(List<Credential> credentials);
 
-    void delete(Long credentialId);
+    void delete(String credentialId);
 
-    Optional<Credential> findOne(Long credentialId);
+    Optional<Credential> findOne(String credentialId);
 
     void update(Credential credential);
 }

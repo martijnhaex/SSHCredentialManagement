@@ -26,9 +26,9 @@ public class CredentialUpdateMapperTest {
 
     @Test
     public void mapToCommandHasEntity() throws Exception {
-        final CredentialUpdateCommand result = mapper.map(Optional.of(CredentialFixture.CREATE(99L)));
+        final CredentialUpdateCommand result = mapper.map(Optional.of(CredentialFixture.CREATE("99")));
 
-        assertThat(result.getId()).isEqualTo(99L);
+        assertThat(result.getId()).isEqualTo("99");
         assertThat(result.getServer()).isEqualTo("SERVER99");
         assertThat(result.getPassword()).isEqualTo("PASSWORD99");
         assertThat(result.getUsername()).isEqualTo("USERNAME99");
@@ -38,12 +38,12 @@ public class CredentialUpdateMapperTest {
     @Test
     public void mapToEntity() throws Exception {
         final CredentialUpdateCommand command = new CredentialUpdateCommand();
-        command.setId(72L);
+        command.setId("72");
         command.setUsername("UPDATED");
 
         final Credential result = mapper.map(command);
 
-        assertThat(result.getId()).isEqualTo(72L);
+        assertThat(result.getId()).isEqualTo("72");
         assertThat(result.getServer()).isNull();
         assertThat(result.getPassword()).isNull();
         assertThat(result.getUsername()).isEqualTo("UPDATED");

@@ -35,13 +35,13 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
-    public String delete(@PathVariable("id") Long credentialId) {
+    public String delete(@PathVariable("id") String credentialId) {
         credentialService.delete(credentialId);
         return "redirect:/";
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-    public String showEdit(@PathVariable("id") Long credentialId,
+    public String showEdit(@PathVariable("id") String credentialId,
                            ModelMap modelMap) {
         modelMap.put("credential", credentialUpdateMapper.map(credentialService.findOne(credentialId)));
         return "update";

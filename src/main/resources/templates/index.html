@@ -1,18 +1,8 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:include="masters/master :: page">
 <head>
-    <title>SSH Credential Management</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no"
-          id="Viewport" name="viewport"/>
-    <link href="https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700" rel="stylesheet"
-          type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="http://spring.io/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="http://spring.io/css/blog.css"/>
-
-    <script src="http://code.jquery.com/jquery-latest.min.js"/>
-    <script type="text/javascript" th:inline="javascript">
-        $(document).on('click', '.selector', function(event) {
+    <script th:fragment="scripts" type="text/javascript" th:inline="javascript">
+        $(document).on('click', '.selector', function (event) {
             selectText('credential_' + event.target.id);
         });
 
@@ -35,57 +25,33 @@
             }
         }
     </script>
+
+    <title th:fragment="title">SSH Credential Management</title>
 </head>
 <body>
-<div class="viewport">
-    <header class="navbar header--navbar desktop-only">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <div class="spring-logo--container">
-                    <a class="spring-logo" href="/"><span></span></a>
-                </div>
-                <ul class="nav pull-right">
-                    <li class="navbar-link">
-                        <a href="/batch-import">Batch Import</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
-    <div class="header--container"></div>
-    <div class="container-fluid"></div>
-    <div></div>
-    <div class="body--container container-fluid">
-        <div class="main-body--wrapper">
-            <div class="blog--container">
-                <div class="meta-data--container">
-                    <article class="blog--post">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Server</th>
-                                <th>User</th>
-                                <th>Url</th>
-                                <th>Connection</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="credential : ${credentials}">
-                                <td th:text="${credential['server']}"></td>
-                                <td th:text="${credential['username']}"></td>
-                                <td th:text="${credential['url']}"></td>
-                                <td th:text="|sshpass -p '${credential['password']}' ssh -o StrictHostKeyChecking=no ${credential['username']}@${credential['url']}|" th:id="|credential_${credential['id']}|"></td>
-                                <td><a href="#" th:id="|${credential['id']}|" class="selector">Select</a></td>
-                                <td><a href="#" th:href="@{'/' + ${credential['id']} + '/edit'}">Update</a></td>
-                                <td><a href="#" th:href="@{'/' + ${credential['id']} + '/delete'}">Delete</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<article th:fragment="content">
+    <table>
+        <thead>
+        <tr>
+            <th>Server</th>
+            <th>User</th>
+            <th>Url</th>
+            <th>Connection</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="credential : ${credentials}">
+            <td th:text="${credential['server']}"></td>
+            <td th:text="${credential['username']}"></td>
+            <td th:text="${credential['url']}"></td>
+            <td th:text="|sshpass -p '${credential['password']}' ssh -o StrictHostKeyChecking=no ${credential['username']}@${credential['url']}|"
+                th:id="|credential_${credential['id']}|"></td>
+            <td><a href="#" th:id="|${credential['id']}|" class="selector">Select</a></td>
+            <td><a href="#" th:href="@{'/' + ${credential['id']} + '/edit'}">Update</a></td>
+            <td><a href="#" th:href="@{'/' + ${credential['id']} + '/delete'}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</article>
 </body>
 </html>
