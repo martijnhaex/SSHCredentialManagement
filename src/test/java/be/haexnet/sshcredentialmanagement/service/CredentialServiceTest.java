@@ -51,7 +51,7 @@ public class CredentialServiceTest {
 
     @Test
     public void delete() throws Exception {
-        credentialService.delete(1L);
+        credentialService.delete("1");
 
         credentials.remove(2);
         verify(credentialRepository).batchSave(credentials);
@@ -59,7 +59,7 @@ public class CredentialServiceTest {
 
     @Test
     public void findOneHappyPath() throws Exception {
-        final Optional<Credential> credential = credentialService.findOne(3L);
+        final Optional<Credential> credential = credentialService.findOne("3");
 
         assertThat(credential.isPresent()).isTrue();
         assertThat(credential.get()).isSameAs(credentials.get(1));
@@ -67,7 +67,7 @@ public class CredentialServiceTest {
 
     @Test
     public void findOneUnhappyPath() throws Exception {
-         assertThat(credentialService.findOne(6L).isPresent()).isFalse();
+         assertThat(credentialService.findOne("6").isPresent()).isFalse();
     }
 
 }

@@ -3,17 +3,17 @@ package be.haexnet.sshcredentialmanagement.controller.command;
 import java.io.Serializable;
 
 public class CredentialUpdateCommand implements Serializable {
-    private Long id;
+    private String id;
     private String server;
     private String username;
     private String password;
     private String url;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

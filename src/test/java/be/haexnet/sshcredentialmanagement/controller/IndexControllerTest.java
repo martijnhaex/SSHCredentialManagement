@@ -66,21 +66,21 @@ public class IndexControllerTest {
 
     @Test
     public void delete() throws Exception {
-        mockMvc.perform(get("/{id}/delete", 1L))
+        mockMvc.perform(get("/{id}/delete", "1"))
                 .andExpect(status().isMovedTemporarily())
                 .andExpect(redirectedUrl("/"));
-        verify(credentialService).delete(1L);
+        verify(credentialService).delete("1");
     }
 
     @Test
     public void edit() throws Exception {
-        final Optional<Credential> credential = Optional.of(CredentialFixture.CREATE(3L));
+        final Optional<Credential> credential = Optional.of(CredentialFixture.CREATE("3"));
         final CredentialUpdateCommand command = new CredentialUpdateCommand();
 
-        when(credentialService.findOne(3L)).thenReturn(credential);
+        when(credentialService.findOne("3")).thenReturn(credential);
         when(credentialUpdateMapper.map(credential)).thenReturn(command);
 
-        mockMvc.perform(get("/{id}/edit", 3L))
+        mockMvc.perform(get("/{id}/edit", "3"))
                 .andExpect(status().isOk())
                 .andExpect(forwardedUrl("update"))
                 .andExpect(model().attribute("credential", sameInstance(command)));
@@ -88,7 +88,7 @@ public class IndexControllerTest {
 
     @Test
     public void update() throws Exception {
-        final Long credentialId = 15L;
+        final String credentialId = "15";
         final String server = "SERVER UPDATE";
         final String password = "password";
         final String username = "USER UPDATE";

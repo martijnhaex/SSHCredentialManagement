@@ -6,13 +6,13 @@ public class Credential implements Serializable {
 
     private static final Long serialVersionUID = 141605814607823206L;
 
-    private final Long id;
+    private final String id;
     private final String server;
     private final String username;
     private final String password;
     private final String url;
 
-    private Credential(Long id, String server, String password, String username, String url) {
+    private Credential(String id, String server, String password, String username, String url) {
         this.id = id;
         this.server = server;
         this.password = password;
@@ -20,11 +20,11 @@ public class Credential implements Serializable {
         this.url = url;
     }
 
-    public static final Credential of(Long id, String server, String password, String username, String url) {
+    public static final Credential of(String id, String server, String password, String username, String url) {
         return new Credential(id, server, password, username, url);
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
