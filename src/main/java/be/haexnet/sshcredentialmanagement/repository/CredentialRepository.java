@@ -21,7 +21,7 @@ public class CredentialRepository {
 
     public void batchSave(final List<Credential> credentials) {
         try {
-            saveAlLCredentials(credentials);
+            saveAllCredentials(credentials);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class CredentialRepository {
         return Collections.emptyList();
     }
 
-    private void saveAlLCredentials(final List<Credential> credentials) throws IOException {
+    private void saveAllCredentials(final List<Credential> credentials) throws IOException {
         final File databaseFile = new File(DATABASE_FILE_NAME);
         try (final ObjectOutput oo = new ObjectOutputStream(new FileOutputStream(databaseFile))) {
             oo.writeObject(credentials);
