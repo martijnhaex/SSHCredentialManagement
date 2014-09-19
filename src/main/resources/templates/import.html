@@ -1,47 +1,15 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:include="masters/master :: page">
 <head>
-    <title>SSH Credential Management</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no" id="Viewport" name="viewport"/>
-    <link href="https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="http://spring.io/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="http://spring.io/css/blog.css"/>
+    <title th:fragment="title">Update SSH Credential</title>
 </head>
 <body>
-<div class="viewport">
-    <header class="navbar header--navbar desktop-only">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <div class="spring-logo--container">
-                    <a class="spring-logo" href="/"><span></span></a>
-                </div>
-                <ul class="nav pull-right">
-                    <li class="navbar-link">
-                        <a href="/batch-import">Batch Import</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
-    <div class="header--container"></div>
-    <div class="container-fluid"></div>
-    <div></div>
-    <div class="body--container container-fluid">
-        <div class="main-body--wrapper">
-            <div class="blog--container">
-                <div class="meta-data--container">
-                    <article class="blog--post">
-                        <form action="#" th:action="@{/batch-import}" th:object="${command}" method="post">
-                            <label th:for="${#ids.next('credentials')}">Import new credentials: </label>
-                            <textarea th:field="*{credentials}"/>
-                            <button type="submit" name="import">Import</button>
-                        </form>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<article th:fragment="content">
+    <form action="#" th:action="@{/batch-import}" th:object="${command}" method="post">
+        <label th:for="${#ids.next('credentials')}">Import new credentials: </label>
+        <textarea th:field="*{credentials}"/>
+        <button type="submit" name="import">Import</button>
+    </form>
+</article>
 </body>
 </html>

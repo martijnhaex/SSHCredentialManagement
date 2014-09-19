@@ -1,61 +1,27 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:include="masters/master :: page">
 <head>
-    <title>Connection Credentials</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no"
-          id="Viewport" name="viewport"/>
-    <link href="https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700" rel="stylesheet"
-          type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="http://spring.io/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="http://spring.io/css/blog.css"/>
+    <title th:fragment="title">Import SSH Credentials</title>
 </head>
 <body>
-<div class="viewport">
-    <header class="navbar header--navbar desktop-only">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <div class="spring-logo--container">
-                    <a class="spring-logo" href="/"><span></span></a>
-                </div>
-                <ul class="nav pull-right">
-                    <li class="navbar-link">
-                        <a href="/import">Batch Import</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
-    <div class="header--container"></div>
-    <div class="container-fluid"></div>
-    <div></div>
-    <div class="body--container container-fluid">
-        <div class="main-body--wrapper">
-            <div class="blog--container">
-                <div class="meta-data--container">
-                    <article class="blog--post">
-                        <form action="#" th:action="@{/edit}" th:object="${credential}" method="post">
-                            <input type="hidden" th:field="*{id}"/>
+<article th:fragment="content">
+    <form action="#" th:action="@{/edit}" th:object="${credential}" method="post">
+        <input type="hidden" th:field="*{id}"/>
 
-                            <label th:for="${#ids.next('server')}">Server: </label>
-                            <input type="text" th:field="*{server}"/>
+        <label th:for="${#ids.next('server')}">Server: </label>
+        <input type="text" th:field="*{server}"/>
 
-                            <label th:for="${#ids.next('username')}">Username: </label>
-                            <input type="text" th:field="*{username}"/>
+        <label th:for="${#ids.next('username')}">Username: </label>
+        <input type="text" th:field="*{username}"/>
 
-                            <label th:for="${#ids.next('password')}">Password: </label>
-                            <input type="text" th:field="*{password}"/>
+        <label th:for="${#ids.next('password')}">Password: </label>
+        <input type="text" th:field="*{password}"/>
 
-                            <label th:for="${#ids.next('url')}">Url: </label>
-                            <input type="text" th:field="*{url}"/>
+        <label th:for="${#ids.next('url')}">Url: </label>
+        <input type="text" th:field="*{url}"/>
 
-                            <button type="submit" name="update">Update</button>
-                        </form>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <button type="submit" name="update">Update</button>
+    </form>
+</article>
 </body>
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no" id="Viewport" name="viewport"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="http://spring.io/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="http://spring.io/css/blog.css"/>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"/>
+    <script th:include="this :: scripts"/>
+
+    <title th:include="this :: title">Master Page Title</title>
+</head>
+<body>
+<div class="viewport">
+    <header th:include="masters/menu :: header" class="navbar header--navbar desktop-only"/>
+    <div class="header--container"></div>
+    <div class="container-fluid"></div>
+    <div class="body--container container-fluid">
+        <div class="main-body--wrapper">
+            <div class="blog--container">
+                <div class="meta-data--container">
+                       <article th:include="this :: content" class="blog--post"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
