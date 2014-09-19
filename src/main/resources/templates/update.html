@@ -20,8 +20,10 @@
         <label th:for="${#ids.next('url')}">Url: </label>
         <input type="text" th:field="*{url}"/>
 
-        <a href="/" name="back">Back</a>
-        <button type="submit" name="update">Update</button>
+        <div class="actions">
+            <a href="/" name="back">Back</a>
+            <button type="submit" name="update">Update</button>
+        </div>
     </form>
 </article>
 </body>
