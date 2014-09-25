@@ -26,7 +26,9 @@ public class CredentialService implements ICredentialService {
 
     @Override
     public void batchSave(final List<Credential> credentials) {
-        credentialRepository.batchSave(credentials);
+        final List<Credential> allCredentials = findAll();
+        allCredentials.addAll(credentials);
+        credentialRepository.batchSave(allCredentials);
     }
 
     @Override

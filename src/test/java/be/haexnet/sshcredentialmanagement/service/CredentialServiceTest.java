@@ -45,7 +45,10 @@ public class CredentialServiceTest {
     @Test
     public void batchSave() throws Exception {
         final List<Credential> credentials = Collections.emptyList();
-        credentialService.batchSave(credentials);
+
+        when(credentialRepository.findAll()).thenReturn(credentials);
+
+        credentialService.batchSave(Collections.emptyList());
         verify(credentialRepository).batchSave(credentials);
     }
 
