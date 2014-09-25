@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class IndexController {
@@ -29,8 +30,7 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(ModelMap modelMap) {
-        final List<Credential> allCredentials = findAllCredentials();
-        modelMap.put("credentials", allCredentials);
+        modelMap.put("credentials", findAllCredentialsSortedOnServer());
         return "index";
     }
 
@@ -53,7 +53,11 @@ public class IndexController {
         return "redirect:/";
     }
 
-    private List<Credential> findAllCredentials() {
-        return credentialService.findAll();
+    private List<Credential> findAllCredentialsSortedOnServer() {
+        return credentialService
+                .findAll()
+                .stream()
+                .sorted((c1, c2) -> c1.getServer().toUpperCase().compareTo(c2.getServer().toUpperCase()))
+                .collect(Collectors.toList());
     }
 }
