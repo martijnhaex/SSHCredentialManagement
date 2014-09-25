@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
@@ -61,7 +62,7 @@ public class IndexControllerTest {
         final List<Credential> credentials = Collections.emptyList();
         when(credentialService.findAll()).thenReturn(credentials);
         doGetIndex()
-                .andExpect(model().attribute("credentials", sameInstance(credentials)));
+                .andExpect(model().attribute("credentials", equalTo(credentials)));
     }
 
     @Test
