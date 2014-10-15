@@ -17,7 +17,7 @@ import static org.fest.assertions.Assertions.assertThat;
 @IntegrationTest("server.port:0")
 public class ApplicationIntegrationTest {
     @Autowired
-    private ICredentialService credentialService;
+    ICredentialService credentialService;
 
     @Test
     public void canAutowire() throws Exception {
