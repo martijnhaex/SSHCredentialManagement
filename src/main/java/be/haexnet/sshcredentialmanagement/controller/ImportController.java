@@ -1,5 +1,6 @@
 package be.haexnet.sshcredentialmanagement.controller;
 
+import be.haexnet.sshcredentialmanagement.controller.command.CredentialCreateCommand;
 import be.haexnet.sshcredentialmanagement.controller.command.CredentialImportCommand;
 import be.haexnet.sshcredentialmanagement.model.Credential;
 import be.haexnet.sshcredentialmanagement.service.ICredentialService;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping("/batch-import")
 public class ImportController {
 
     private final ICredentialService credentialService;
@@ -26,13 +26,18 @@ public class ImportController {
         this.credentialParser = credentialParser;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String showImport(@ModelAttribute("command") CredentialImportCommand credentialImportCommand) {
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public String showSingleImport(@ModelAttribute("command") CredentialCreateCommand credentialCreateCommand) {
         return "import";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String doImport(@ModelAttribute("command") CredentialImportCommand credentialImportCommand) {
+    @RequestMapping(value = "/batch-import", method = RequestMethod.GET)
+    public String showBatchImport(@ModelAttribute("command") CredentialImportCommand credentialImportCommand) {
+        return "batchImport";
+    }
+
+    @RequestMapping(value = "/batch-import", method = RequestMethod.POST)
+    public String doBatchImport(@ModelAttribute("command") CredentialImportCommand credentialImportCommand) {
         saveCredentials(credentialImportCommand);
         return "redirect:/";
     }

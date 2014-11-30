@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:include="masters/master :: page">
+<head>
+    <title th:fragment="title">Update SSH Credential</title>
+</head>
+<body>
+<article th:fragment="content">
+    <div clas="highlight">
+        <pre>
+            <span>
+                A credential is added by [SERVER NAME],[PASSWORD],[USERNAME],[URL].
+                Multiple credentials are added by a line break.
+            </span>
+        </pre>
+    </div>
+
+    <form action="#" th:action="@{/batch-import}" th:object="${command}" method="post">
+        <label th:for="${#ids.next('credentials')}">Import new credentials: </label>
+        <textarea th:field="*{credentials}"/>
+
+        <div class="actions">
+            <a href="/" name="back">Back</a>
+            <button type="submit" name="import">Import</button>
+        </div>
+    </form>
+</article>
+</body>
+</html>

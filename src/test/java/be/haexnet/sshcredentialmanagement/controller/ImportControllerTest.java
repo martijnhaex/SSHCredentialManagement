@@ -34,6 +34,36 @@ public class ImportControllerTest {
     }
 
     @Test
+    public void showBatchImportStatus() throws Exception {
+        doGetBatchImport()
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void showBatchImportForward() throws Exception {
+        doGetBatchImport()
+                .andExpect(forwardedUrl("batchImport"));
+    }
+
+    @Test
+    public void showBatchImportHasCommand() throws Exception {
+        doGetBatchImport()
+                .andExpect(model().attributeExists("command"));
+    }
+
+    @Test
+    public void doBatchImportStatus() throws Exception {
+        doPostBatchImport()
+                .andExpect(status().isMovedTemporarily());
+    }
+
+    @Test
+    public void doBtachImportRedirect() throws Exception {
+        doPostBatchImport()
+                .andExpect(redirectedUrl("/"));
+    }
+
+    @Test
     public void showImportStatus() throws Exception {
         doGetImport()
                 .andExpect(status().isOk());
@@ -51,23 +81,15 @@ public class ImportControllerTest {
                 .andExpect(model().attributeExists("command"));
     }
 
-    @Test
-    public void doImportStatus() throws Exception {
-        doPostImport()
-                .andExpect(status().isMovedTemporarily());
-    }
-
-    @Test
-    public void doImportRedirect() throws Exception {
-        doPostImport()
-                .andExpect(redirectedUrl("/"));
-    }
-
-    private ResultActions doGetImport() throws Exception {
+    private ResultActions doGetBatchImport() throws Exception {
         return mockMvc.perform(get("/batch-import"));
     }
 
-    private ResultActions doPostImport() throws Exception {
+    private ResultActions doPostBatchImport() throws Exception {
         return mockMvc.perform(post("/batch-import").param("credentials", "SERVER1,tomcat,tomcat,192.168.1.1\nSERVER2,root,tomcat,192.168.1.2"));
+    }
+
+    private ResultActions doGetImport() throws Exception {
+        return mockMvc.perform(get("/create"));
     }
 }

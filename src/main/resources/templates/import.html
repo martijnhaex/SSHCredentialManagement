@@ -5,18 +5,15 @@
 </head>
 <body>
 <article th:fragment="content">
-    <div clas="highlight">
-        <pre>
-            <span>
-                A credential is added by [SERVER NAME],[PASSWORD],[USERNAME],[URL].
-                Multiple credentials are added by a line break.
-            </span>
-        </pre>
-    </div>
-
-    <form action="#" th:action="@{/batch-import}" th:object="${command}" method="post">
-        <label th:for="${#ids.next('credentials')}">Import new credentials: </label>
-        <textarea th:field="*{credentials}"/>
+    <form action="#" th:action="@{/create}" th:object="${command}" method="post">
+        <label th:for="${#ids.next('server')}">Server </label>
+        <input type="text" th:field="*{username}"/>
+        <label th:for="${#ids.next('username')}">Username </label>
+        <input type="text" th:field="*{password}"/>
+        <label th:for="${#ids.next('password')}">Password </label>
+        <input type="text" th:field="*{password}"/>
+        <label th:for="${#ids.next('url')}">Url </label>
+        <input type="text" th:field="*{url}"/>
 
         <div class="actions">
             <a href="/" name="back">Back</a>
